@@ -1,0 +1,29 @@
+[log]
+LogPath = "/var/log/gfa/debug.log"
+LogLevel = "debug"
+MaxSize = 10
+Compress = true
+MaxAge = 7
+MaxBackups = 10
+Format = "json"
+
+[server]
+Port = 9090
+Mode = "debug"
+MaxWorkers = 20 #并发线程数(有需要调整,满足大部分场景)
+MaxQueue = 20 #任务队列数(有需要调整,满足大部分场景)
+Size = 104857600000 #当存放pcap文件的目录大小达到此值(100G)将清理磁盘,根据磁盘空间大小自行调整
+
+[traffic]
+Path = "/data/traffic/" #指定存放pcap文件目录路径
+NetworkCard = "eth1" #指定接收镜像网卡
+Interval = "1" #每秒生成一个pcap文件(无需改动)
+Size = "100000" #指定pcap文件大小在该值以下（无需改动）
+Workers = 1 #解析pcap文件并发数(有需要调整,满足大部分场景)
+Location = "xx_idc" #标记流量源
+
+[kafka]
+Brokers = ["x.x.x.x:9092", "x.x.x.x:9092", "x.x.x.x:9092"] #brokers集群地址
+Topic = "traffic" # topic名称
+Workers = 1 #异步发送消息并发数(有需要调整,满足大部分场景)
+MaxQueue = 5000000 #kafka缓冲队列数
