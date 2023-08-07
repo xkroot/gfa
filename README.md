@@ -9,8 +9,19 @@ make build
 # 使用
 
 ```bash
+yum install epel-release
 yum install tcpdump
-./bin/gfa -conf core.config.toml
+yum install supervisor
+yum install dos2unix
+systemctl enable supervisord
+systemctl start supervisord
+dos2unix run.sh
+#启动
+run.sh start
+#停止
+run.sh stop
+#重启
+run.sh restart
 ```
 
 # 拆包(可根据需求自行定义其他字段)
