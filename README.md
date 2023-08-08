@@ -1,32 +1,41 @@
-# gfa (高性能、低延迟的流量采集与拆包工具，可实现网络流量可视化、安全实时事件分析)
+# GFA
 
-# 编译
+# 介绍 (Introduction)
+
+GFA是一个高性能、低延时的流量采集器，它具备几乎实时的拆包能力，通过多地埋点部署以及打标功能可为后续的流量可视化和安全事件分析提供支撑
+GFA is a high-performance, low-latency traffic collector with near-real-time packet disassembly capability. Through
+multi-site deployment and labeling functionality, it provides support for subsequent traffic visualization and security
+event analysis.
+
+# 编译 (Compile)
 
 ```bash
 make build
 ```
 
-# 使用
+# 使用 (Use)
 
 ```bash
+# `core.conf.toml` as the project configuration file. Please read before usage, as detailed comments have been added.
+
 yum install epel-release
 yum install tcpdump
 yum install supervisor
 yum install dos2unix
 systemctl enable supervisord
 systemctl start supervisord
+chmod +x run.sh
 dos2unix run.sh
-#启动
+
 ./run.sh start
-#停止
 ./run.sh stop
-#重启
 ./run.sh restart
 ```
 
-# 拆包(可根据需求自行定义其他字段)
+# 流量提取 (Traffic extraction)
 
-```json
+```bash
+# You can extract other information as needed.
 {
   "tcp_flags": "tcp三次握手标志位(SYN/ACK/FIN...)",
   "source_port": "源端口",
@@ -47,6 +56,6 @@ dos2unix run.sh
 }
 ```
 
-# 设计
+# 架构设计 (Architectural design)
 
 ![img](doc/traffic.jpg)
